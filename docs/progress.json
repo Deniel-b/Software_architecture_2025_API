@@ -1,0 +1,1490 @@
+{
+  "title": "Software Architecture 2025 — проекты студентов",
+  "repo": "godor1333/Software_architecture_2025_API",
+  "repo_url": "https://github.com/godor1333/Software_architecture_2025_API",
+  "site_url": "https://godor1333.github.io/Software_architecture_2025_API/",
+  "updated_at": "2026-10-19T19:50:00+03:00",
+  "done": 0,
+  "total": 40,
+  "report_checklist": [
+    "Цель и проблема проекта",
+    "требования и ограничения",
+    "описание входных и выходных данных",
+    "архитектурная схема (желательно C4: Context/Container/Component)",
+    "описание всех микросервисов и границ ответственности",
+    "Kafka topics, producers/consumers, формат сообщений и consumer groups",
+    "схема БД/аналитического хранилища и индексы",
+    "API с примерами запросов и ответов",
+    "минимум 3 применённых паттерна: место применения + зачем + схема/код",
+    "Dockerfile/docker-compose и инструкция запуска",
+    "тестирование и результаты",
+    "скриншоты работающего pipeline/dashboard/API",
+    "для ML: датасет, preprocessing, модель, метрики, baseline, результаты и ограничения",
+    "для RL: environment, state/action/reward, алгоритм, график обучения, итоговые метрики и сравнение",
+    "выводы и распределение работы"
+  ],
+  "report_template": [
+    {
+      "section": "Постановка задачи",
+      "required": "Проблема, цель, пользователи, сценарии, входные/выходные данные."
+    },
+    {
+      "section": "Архитектура",
+      "required": "C4 или аналогичная схема; сервисы; связи; синхронные/асинхронные взаимодействия; точки отказа."
+    },
+    {
+      "section": "Kafka / streaming",
+      "required": "Topics, producers, consumers, consumer groups, формат сообщений, retries/DLQ, порядок обработки."
+    },
+    {
+      "section": "Хранилища",
+      "required": "Выбор PostgreSQL/ClickHouse/Redis/Vector DB и обоснование; схема данных, индексы, retention."
+    },
+    {
+      "section": "API",
+      "required": "Endpoints, схемы запросов/ответов, ошибки, авторизация при необходимости."
+    },
+    {
+      "section": "Паттерны",
+      "required": "Минимум 3 паттерна; где применён, почему выбран, UML/схема и фрагмент реализации."
+    },
+    {
+      "section": "ML/CV/NLP",
+      "required": "Датасет, preprocessing, baseline, модель, метрики, результаты, ограничения."
+    },
+    {
+      "section": "RL",
+      "required": "Environment, state, action space, reward, алгоритм (PPO/DQN и т.п.), training curve, evaluation и baseline."
+    },
+    {
+      "section": "LLM/RAG",
+      "required": "Модель, prompt/structured output, chunking, embeddings, vector search, retrieval quality, hallucination controls."
+    },
+    {
+      "section": "Видео/CV",
+      "required": "Источник кадров, FPS/батчинг, preprocessing, inference, tracking/segmentation/detection и сохранение результатов."
+    },
+    {
+      "section": "Надёжность",
+      "required": "Timeouts, retries, idempotency, circuit breaker, обработка падения consumer/service."
+    },
+    {
+      "section": "Docker",
+      "required": "Dockerfiles, docker-compose, переменные окружения, инструкция запуска."
+    },
+    {
+      "section": "Тестирование",
+      "required": "Unit + integration тесты, ключевые сценарии, результаты."
+    },
+    {
+      "section": "Демонстрация",
+      "required": "Работающий pipeline, API, Kafka, ML/CV/RL/LLM часть и аналитический экран."
+    },
+    {
+      "section": "Выводы",
+      "required": "Что сделано, измеримые результаты, ограничения, дальнейшее развитие."
+    }
+  ],
+  "students": [
+    {
+      "name": "Эля Варганова",
+      "slug": "Varganova_Elya",
+      "path": "projects/Varganova_Elya",
+      "done": 0,
+      "total": 5,
+      "projects": [
+        {
+          "n": 1,
+          "title": "RL-агент для управления гоночным автомобилем",
+          "slug": "1_rl-agent-dlya-upravleniya-gonochnym",
+          "task": "Обучить агента проходить трассу и выбирать газ/тормоз/руль с максимизацией награды за время и отсутствие аварий.",
+          "tech": [
+            "Python",
+            "Gymnasium",
+            "Stable-Baselines3",
+            "PyTorch",
+            "Pygame",
+            "FastAPI",
+            "Kafka",
+            "PostgreSQL",
+            "Grafana",
+            "Docker"
+          ],
+          "architecture": "RL training service + game simulator + telemetry/event streaming; offline training and online inference separated",
+          "patterns": [
+            "Strategy",
+            "State",
+            "Observer",
+            "Factory",
+            "Command",
+            "Producer–Consumer"
+          ],
+          "path": "projects/Varganova_Elya/1_rl-agent-dlya-upravleniya-gonochnym",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Varganova_Elya/1_rl-agent-dlya-upravleniya-gonochnym",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 2,
+          "title": "Антифрод для онлайн-казино/игровых ставок",
+          "slug": "2_antifrod-dlya-onlayn-kazino-igrovykh",
+          "task": "Анализировать игровые ставки и аккаунты, находить подозрительные паттерны, мультиаккаунты и резкие изменения поведения.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "FastAPI",
+            "XGBoost",
+            "Redis",
+            "ClickHouse",
+            "PostgreSQL",
+            "Grafana",
+            "Docker"
+          ],
+          "architecture": "Event-driven streaming + feature service + rule engine + ML scoring + case management",
+          "patterns": [
+            "Chain of Responsibility",
+            "Strategy",
+            "Repository",
+            "Factory",
+            "Circuit Breaker",
+            "Producer–Consumer"
+          ],
+          "path": "projects/Varganova_Elya/2_antifrod-dlya-onlayn-kazino-igrovykh",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Varganova_Elya/2_antifrod-dlya-onlayn-kazino-igrovykh",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 3,
+          "title": "Сегментация автомобилей на дорожных камерах",
+          "slug": "3_segmentatsiya-avtomobiley-na-dorozhnykh",
+          "task": "По видеопотоку выделять автомобили, автобусы и грузовики пиксельной сегментацией и считать их характеристики.",
+          "tech": [
+            "Python",
+            "OpenCV",
+            "PyTorch",
+            "U-Net/SegFormer",
+            "Kafka",
+            "MinIO",
+            "FastAPI",
+            "PostgreSQL",
+            "Docker"
+          ],
+          "architecture": "Video ingestion → frame extraction → segmentation inference → object analytics → storage/API",
+          "patterns": [
+            "Pipeline",
+            "Adapter",
+            "Strategy",
+            "Repository",
+            "Observer"
+          ],
+          "path": "projects/Varganova_Elya/3_segmentatsiya-avtomobiley-na-dorozhnykh",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Varganova_Elya/3_segmentatsiya-avtomobiley-na-dorozhnykh",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 4,
+          "title": "LLM-система проверки юридических договоров",
+          "slug": "4_llm-sistema-proverki-yuridicheskikh",
+          "task": "Загружать договоры, извлекать пункты, находить потенциально рискованные условия и формировать объяснимое резюме.",
+          "tech": [
+            "Python",
+            "FastAPI",
+            "LLM/Hugging Face",
+            "embeddings",
+            "pgvector/Elasticsearch",
+            "Kafka",
+            "MinIO",
+            "Docker"
+          ],
+          "architecture": "Document processing pipeline + RAG + asynchronous jobs + API gateway",
+          "patterns": [
+            "Facade",
+            "Strategy",
+            "Adapter",
+            "Repository",
+            "Pipeline",
+            "Command"
+          ],
+          "path": "projects/Varganova_Elya/4_llm-sistema-proverki-yuridicheskikh",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Varganova_Elya/4_llm-sistema-proverki-yuridicheskikh",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 5,
+          "title": "RL-агент для игры в клеточный dungeon crawler",
+          "slug": "5_rl-agent-dlya-igry-v-kletochnyy-dungeon",
+          "task": "Создать среду игры и обучить агента исследовать карту, собирать награды и избегать ловушек/врагов.",
+          "tech": [
+            "Python",
+            "Gymnasium",
+            "PyTorch",
+            "Stable-Baselines3",
+            "Pygame",
+            "Kafka",
+            "MLflow",
+            "Docker"
+          ],
+          "architecture": "Game simulator + RL trainer + inference service + telemetry collector",
+          "patterns": [
+            "State",
+            "Strategy",
+            "Observer",
+            "Command",
+            "Factory",
+            "Event Sourcing"
+          ],
+          "path": "projects/Varganova_Elya/5_rl-agent-dlya-igry-v-kletochnyy-dungeon",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Varganova_Elya/5_rl-agent-dlya-igry-v-kletochnyy-dungeon",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        }
+      ]
+    },
+    {
+      "name": "Никита Шарунин",
+      "slug": "Sharunin_Nikita",
+      "path": "projects/Sharunin_Nikita",
+      "done": 0,
+      "total": 5,
+      "projects": [
+        {
+          "n": 1,
+          "title": "Антифрод для маркетплейса: возвраты и купоны",
+          "slug": "1_antifrod-dlya-marketpleysa-vozvraty-i",
+          "task": "Находить злоупотребления возвратами, промокодами и бонусами, учитывая связи пользователей, заказов и устройств.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "LightGBM",
+            "NetworkX",
+            "Redis",
+            "ClickHouse",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "Streaming transaction graph + rules + graph features + ML scoring",
+          "patterns": [
+            "Strategy",
+            "Chain of Responsibility",
+            "Repository",
+            "Adapter",
+            "Observer"
+          ],
+          "path": "projects/Sharunin_Nikita/1_antifrod-dlya-marketpleysa-vozvraty-i",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Sharunin_Nikita/1_antifrod-dlya-marketpleysa-vozvraty-i",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 2,
+          "title": "Детекция дефектов на рентгене промышленных деталей",
+          "slug": "2_detektsiya-defektov-na-rentgene",
+          "task": "Определять трещины, поры и другие дефекты на рентгеновских изображениях деталей.",
+          "tech": [
+            "Python",
+            "PyTorch",
+            "YOLO/Segmentation",
+            "OpenCV",
+            "MinIO",
+            "Kafka",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "Image ingestion → preprocessing → CV inference → defect registry → analytics",
+          "patterns": [
+            "Pipeline",
+            "Strategy",
+            "Factory",
+            "Adapter",
+            "Repository"
+          ],
+          "path": "projects/Sharunin_Nikita/2_detektsiya-defektov-na-rentgene",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Sharunin_Nikita/2_detektsiya-defektov-na-rentgene",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 3,
+          "title": "Классификатор книг и рекомендаций по аннотациям",
+          "slug": "3_klassifikator-knig-i-rekomendatsiy-po",
+          "task": "Анализировать описания книг, определять жанры, темы и строить рекомендации на основе семантической близости.",
+          "tech": [
+            "Python",
+            "FastAPI",
+            "Hugging Face",
+            "sentence-transformers",
+            "PostgreSQL",
+            "pgvector",
+            "Kafka",
+            "Docker"
+          ],
+          "architecture": "NLP ingestion pipeline + embedding service + recommendation API",
+          "patterns": [
+            "Strategy",
+            "Repository",
+            "Adapter",
+            "Facade",
+            "Pipeline"
+          ],
+          "path": "projects/Sharunin_Nikita/3_klassifikator-knig-i-rekomendatsiy-po",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Sharunin_Nikita/3_klassifikator-knig-i-rekomendatsiy-po",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 4,
+          "title": "Анализ речи операторов колл-центра",
+          "slug": "4_analiz-rechi-operatorov-koll-tsentra",
+          "task": "Расшифровывать разговоры, определять тему обращения, эмоциональную окраску и нарушения скрипта.",
+          "tech": [
+            "Python",
+            "Whisper",
+            "Hugging Face",
+            "Kafka",
+            "FastAPI",
+            "Elasticsearch",
+            "PostgreSQL",
+            "Docker"
+          ],
+          "architecture": "Audio ingestion → ASR → NLP classifiers → compliance service → analytics",
+          "patterns": [
+            "Pipeline",
+            "Adapter",
+            "Strategy",
+            "Observer",
+            "Repository"
+          ],
+          "path": "projects/Sharunin_Nikita/4_analiz-rechi-operatorov-koll-tsentra",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Sharunin_Nikita/4_analiz-rechi-operatorov-koll-tsentra",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 5,
+          "title": "RL-агент для StarCraft-подобной стратегии",
+          "slug": "5_rl-agent-dlya-starcraft-podobnoy",
+          "task": "Обучить агента выбирать действия в упрощённой RTS-игре: сбор ресурсов, производство юнитов и атака противника.",
+          "tech": [
+            "Python",
+            "Gymnasium",
+            "PyTorch",
+            "Stable-Baselines3",
+            "Pygame",
+            "Kafka",
+            "MLflow",
+            "Docker"
+          ],
+          "architecture": "Game environment + RL trainer + policy inference + match telemetry",
+          "patterns": [
+            "State",
+            "Strategy",
+            "Command",
+            "Observer",
+            "Factory",
+            "Event Sourcing"
+          ],
+          "path": "projects/Sharunin_Nikita/5_rl-agent-dlya-starcraft-podobnoy",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Sharunin_Nikita/5_rl-agent-dlya-starcraft-podobnoy",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        }
+      ]
+    },
+    {
+      "name": "Дима Леонов",
+      "slug": "Leonov_Dima",
+      "path": "projects/Leonov_Dima",
+      "done": 0,
+      "total": 5,
+      "projects": [
+        {
+          "n": 1,
+          "title": "Антифрод платежей в интернет-магазине",
+          "slug": "1_antifrod-platezhey-v-internet-magazine",
+          "task": "Скоринг транзакций по сумме, времени, устройству, IP и истории покупок с отдельной системой правил.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "XGBoost",
+            "Redis",
+            "ClickHouse",
+            "FastAPI",
+            "Grafana",
+            "Docker"
+          ],
+          "architecture": "Real-time scoring pipeline with feature cache, rule engine and analytical sink",
+          "patterns": [
+            "Chain of Responsibility",
+            "Strategy",
+            "Repository",
+            "Circuit Breaker",
+            "Producer–Consumer"
+          ],
+          "path": "projects/Leonov_Dima/1_antifrod-platezhey-v-internet-magazine",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Leonov_Dima/1_antifrod-platezhey-v-internet-magazine",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 2,
+          "title": "Сегментация опухолей на МРТ",
+          "slug": "2_segmentatsiya-opukholey-na-mrt",
+          "task": "Сегментировать области опухоли на медицинских снимках и рассчитывать объём поражённой области.",
+          "tech": [
+            "Python",
+            "PyTorch",
+            "MONAI",
+            "U-Net",
+            "DICOM/NIfTI",
+            "MinIO",
+            "FastAPI",
+            "PostgreSQL",
+            "Docker"
+          ],
+          "architecture": "Medical image pipeline + inference service + result storage + visualization API",
+          "patterns": [
+            "Pipeline",
+            "Adapter",
+            "Strategy",
+            "Repository",
+            "Facade"
+          ],
+          "path": "projects/Leonov_Dima/2_segmentatsiya-opukholey-na-mrt",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Leonov_Dima/2_segmentatsiya-opukholey-na-mrt",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 3,
+          "title": "NER и извлечение сущностей из новостных статей",
+          "slug": "3_ner-i-izvlechenie-sushchnostey-iz",
+          "task": "Извлекать людей, организации, компании, места и события из новостей и связывать их между статьями.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "Hugging Face",
+            "spaCy",
+            "Elasticsearch",
+            "PostgreSQL",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "Streaming NLP pipeline + entity extraction + entity linking + search index",
+          "patterns": [
+            "Pipeline",
+            "Strategy",
+            "Adapter",
+            "Repository",
+            "Observer"
+          ],
+          "path": "projects/Leonov_Dima/3_ner-i-izvlechenie-sushchnostey-iz",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Leonov_Dima/3_ner-i-izvlechenie-sushchnostey-iz",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 4,
+          "title": "Поиск токсичности в игровых чатах",
+          "slug": "4_poisk-toksichnosti-v-igrovykh-chatakh",
+          "task": "Обрабатывать сообщения игроков, определять токсичность, оскорбления, угрозы и спам, формируя события модерации.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "Hugging Face",
+            "FastAPI",
+            "Redis",
+            "Elasticsearch",
+            "PostgreSQL",
+            "Docker"
+          ],
+          "architecture": "Chat stream → moderation classifiers → policy engine → moderation queue",
+          "patterns": [
+            "Chain of Responsibility",
+            "Strategy",
+            "Observer",
+            "Repository",
+            "Command"
+          ],
+          "path": "projects/Leonov_Dima/4_poisk-toksichnosti-v-igrovykh-chatakh",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Leonov_Dima/4_poisk-toksichnosti-v-igrovykh-chatakh",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 5,
+          "title": "Прогнозирование поломок промышленного оборудования",
+          "slug": "5_prognozirovanie-polomok-promyshlennogo",
+          "task": "Собирать телеметрию станков и предсказывать вероятность отказа по температуре, вибрации, нагрузке и другим сигналам.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "scikit-learn/XGBoost",
+            "TimescaleDB/ClickHouse",
+            "FastAPI",
+            "Grafana",
+            "Docker"
+          ],
+          "architecture": "IoT streaming + feature extraction + predictive model + alerting service",
+          "patterns": [
+            "Observer",
+            "Strategy",
+            "Repository",
+            "Pipeline",
+            "Circuit Breaker"
+          ],
+          "path": "projects/Leonov_Dima/5_prognozirovanie-polomok-promyshlennogo",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Leonov_Dima/5_prognozirovanie-polomok-promyshlennogo",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        }
+      ]
+    },
+    {
+      "name": "Лиля Тютерева",
+      "slug": "Tyutereva_Lilya",
+      "path": "projects/Tyutereva_Lilya",
+      "done": 0,
+      "total": 5,
+      "projects": [
+        {
+          "n": 1,
+          "title": "Антифрод страховых выплат",
+          "slug": "1_antifrod-strakhovykh-vyplat",
+          "task": "Выявлять подозрительные страховые случаи по заявкам, истории клиента, суммам и связанным объектам.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "CatBoost/LightGBM",
+            "PostgreSQL",
+            "ClickHouse",
+            "NetworkX",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "Claims event stream + graph/feature service + ML scoring + investigator API",
+          "patterns": [
+            "Strategy",
+            "Chain of Responsibility",
+            "Repository",
+            "Adapter",
+            "Observer"
+          ],
+          "path": "projects/Tyutereva_Lilya/1_antifrod-strakhovykh-vyplat",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Tyutereva_Lilya/1_antifrod-strakhovykh-vyplat",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 2,
+          "title": "Детекция людей и подсчёт посетителей магазина",
+          "slug": "2_detektsiya-lyudey-i-podschet",
+          "task": "Обрабатывать камеры магазина, обнаруживать людей, считать входы/выходы и строить статистику загрузки.",
+          "tech": [
+            "Python",
+            "OpenCV",
+            "YOLO",
+            "Kafka",
+            "FastAPI",
+            "PostgreSQL",
+            "MinIO",
+            "Grafana",
+            "Docker"
+          ],
+          "architecture": "RTSP/video ingestion + detector + tracker + counting service + analytics",
+          "patterns": [
+            "Pipeline",
+            "Observer",
+            "Strategy",
+            "Adapter",
+            "Repository"
+          ],
+          "path": "projects/Tyutereva_Lilya/2_detektsiya-lyudey-i-podschet",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Tyutereva_Lilya/2_detektsiya-lyudey-i-podschet",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 3,
+          "title": "LLM-ассистент по технической документации",
+          "slug": "3_llm-assistent-po-tekhnicheskoy",
+          "task": "Индексировать документацию проекта и отвечать на вопросы с использованием RAG, показывая источники найденной информации.",
+          "tech": [
+            "Python",
+            "FastAPI",
+            "LLM",
+            "embeddings",
+            "pgvector/Qdrant",
+            "Kafka",
+            "MinIO",
+            "Docker"
+          ],
+          "architecture": "Document ingestion + vector index + RAG service + conversational API",
+          "patterns": [
+            "Facade",
+            "Adapter",
+            "Strategy",
+            "Repository",
+            "Pipeline"
+          ],
+          "path": "projects/Tyutereva_Lilya/3_llm-assistent-po-tekhnicheskoy",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Tyutereva_Lilya/3_llm-assistent-po-tekhnicheskoy",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 4,
+          "title": "Суммаризация научных статей",
+          "slug": "4_summarizatsiya-nauchnykh-statey",
+          "task": "Собирать статьи из открытых источников, удалять дубли и автоматически делать краткие структурированные аннотации.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "Hugging Face",
+            "Elasticsearch",
+            "PostgreSQL",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "Scraping/ingestion → deduplication → summarization → indexing → analytics",
+          "patterns": [
+            "Pipeline",
+            "Strategy",
+            "Adapter",
+            "Repository",
+            "Producer–Consumer"
+          ],
+          "path": "projects/Tyutereva_Lilya/4_summarizatsiya-nauchnykh-statey",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Tyutereva_Lilya/4_summarizatsiya-nauchnykh-statey",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 5,
+          "title": "RL для управления складским роботом",
+          "slug": "5_rl-dlya-upravleniya-skladskim-robotom",
+          "task": "В симуляторе обучить робота выбирать маршрут между стеллажами, избегать препятствий и минимизировать время доставки.",
+          "tech": [
+            "Python",
+            "Gymnasium",
+            "PyTorch",
+            "Stable-Baselines3",
+            "Pygame",
+            "Kafka",
+            "Docker"
+          ],
+          "architecture": "Robot simulator + RL trainer + policy server + telemetry stream",
+          "patterns": [
+            "State",
+            "Strategy",
+            "Command",
+            "Observer",
+            "Factory"
+          ],
+          "path": "projects/Tyutereva_Lilya/5_rl-dlya-upravleniya-skladskim-robotom",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Tyutereva_Lilya/5_rl-dlya-upravleniya-skladskim-robotom",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        }
+      ]
+    },
+    {
+      "name": "Даша Фролова",
+      "slug": "Frolova_Dasha",
+      "path": "projects/Frolova_Dasha",
+      "done": 0,
+      "total": 5,
+      "projects": [
+        {
+          "n": 1,
+          "title": "Антифрод билетов на концерты",
+          "slug": "1_antifrod-biletov-na-kontserty",
+          "task": "Искать ботов, массовые покупки, перепродажи и подозрительные комбинации аккаунтов и устройств.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "LightGBM",
+            "Redis",
+            "ClickHouse",
+            "PostgreSQL",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "Event-driven ticketing analytics + identity/device features + ML/rule scoring",
+          "patterns": [
+            "Chain of Responsibility",
+            "Strategy",
+            "Repository",
+            "Factory",
+            "Circuit Breaker"
+          ],
+          "path": "projects/Frolova_Dasha/1_antifrod-biletov-na-kontserty",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Frolova_Dasha/1_antifrod-biletov-na-kontserty",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 2,
+          "title": "Сегментация дорожной сцены для беспилотника",
+          "slug": "2_segmentatsiya-dorozhnoy-stseny-dlya",
+          "task": "Сегментировать дорогу, автомобили, пешеходов, разметку и препятствия на кадрах с камеры.",
+          "tech": [
+            "Python",
+            "PyTorch",
+            "SegFormer/DeepLab",
+            "OpenCV",
+            "Kafka",
+            "MinIO",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "Video stream → preprocessing → semantic segmentation → scene analytics",
+          "patterns": [
+            "Pipeline",
+            "Strategy",
+            "Adapter",
+            "Repository",
+            "Observer"
+          ],
+          "path": "projects/Frolova_Dasha/2_segmentatsiya-dorozhnoy-stseny-dlya",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Frolova_Dasha/2_segmentatsiya-dorozhnoy-stseny-dlya",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 3,
+          "title": "Анализ отзывов пациентов о клиниках",
+          "slug": "3_analiz-otzyvov-patsientov-o-klinikakh",
+          "task": "Классифицировать отзывы по аспектам: врач, ожидание, сервис, стоимость и результат лечения; определять тональность.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "Hugging Face",
+            "FastAPI",
+            "Elasticsearch",
+            "PostgreSQL",
+            "Docker"
+          ],
+          "architecture": "Text stream → aspect extraction → sentiment → analytics index",
+          "patterns": [
+            "Pipeline",
+            "Strategy",
+            "Repository",
+            "Adapter",
+            "Observer"
+          ],
+          "path": "projects/Frolova_Dasha/3_analiz-otzyvov-patsientov-o-klinikakh",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Frolova_Dasha/3_analiz-otzyvov-patsientov-o-klinikakh",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 4,
+          "title": "Мультимодальный модератор изображений форумов",
+          "slug": "4_multimodalnyy-moderator-izobrazheniy",
+          "task": "Определять NSFW, spam и запрещённые изображения, объединяя визуальную модель с анализом текста публикации.",
+          "tech": [
+            "Python",
+            "PyTorch",
+            "CLIP",
+            "Hugging Face",
+            "Kafka",
+            "MinIO",
+            "FastAPI",
+            "Elasticsearch",
+            "Docker"
+          ],
+          "architecture": "Media ingestion → vision/text inference → policy fusion → moderation events",
+          "patterns": [
+            "Strategy",
+            "Chain of Responsibility",
+            "Adapter",
+            "Observer",
+            "Facade"
+          ],
+          "path": "projects/Frolova_Dasha/4_multimodalnyy-moderator-izobrazheniy",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Frolova_Dasha/4_multimodalnyy-moderator-izobrazheniy",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 5,
+          "title": "RL-агент для Pong/Breakout",
+          "slug": "5_rl-agent-dlya-pong-breakout",
+          "task": "Создать игровую среду и обучить агента получать максимальный игровой счёт через взаимодействие с окружением.",
+          "tech": [
+            "Python",
+            "Gymnasium",
+            "PyTorch",
+            "Stable-Baselines3",
+            "Pygame",
+            "MLflow",
+            "Docker"
+          ],
+          "architecture": "Environment + trainer + inference + metrics/experiment tracking",
+          "patterns": [
+            "State",
+            "Strategy",
+            "Observer",
+            "Factory",
+            "Command"
+          ],
+          "path": "projects/Frolova_Dasha/5_rl-agent-dlya-pong-breakout",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Frolova_Dasha/5_rl-agent-dlya-pong-breakout",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        }
+      ]
+    },
+    {
+      "name": "Денис Сивогривов",
+      "slug": "Sivogrivov_Denis",
+      "path": "projects/Sivogrivov_Denis",
+      "done": 0,
+      "total": 5,
+      "projects": [
+        {
+          "n": 1,
+          "title": "Антифрод микрозаймов",
+          "slug": "1_antifrod-mikrozaymov",
+          "task": "Оценивать заявки на займ и искать подозрительные комбинации анкет, устройств, телефонов и истории обращений.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "CatBoost",
+            "Redis",
+            "PostgreSQL",
+            "ClickHouse",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "Loan application stream + feature service + ML/rules + decision API",
+          "patterns": [
+            "Strategy",
+            "Chain of Responsibility",
+            "Repository",
+            "Adapter",
+            "Circuit Breaker"
+          ],
+          "path": "projects/Sivogrivov_Denis/1_antifrod-mikrozaymov",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Sivogrivov_Denis/1_antifrod-mikrozaymov",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 2,
+          "title": "Детекция нарушений техники безопасности на производстве",
+          "slug": "2_detektsiya-narusheniy-tekhniki",
+          "task": "По камерам определять каски, жилеты, людей и опасные зоны, фиксируя нарушения.",
+          "tech": [
+            "Python",
+            "OpenCV",
+            "YOLO",
+            "Kafka",
+            "FastAPI",
+            "PostgreSQL",
+            "MinIO",
+            "Grafana",
+            "Docker"
+          ],
+          "architecture": "Video ingestion + object detection + zone rules + incident service",
+          "patterns": [
+            "Observer",
+            "Strategy",
+            "Chain of Responsibility",
+            "Repository",
+            "Pipeline"
+          ],
+          "path": "projects/Sivogrivov_Denis/2_detektsiya-narusheniy-tekhniki",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Sivogrivov_Denis/2_detektsiya-narusheniy-tekhniki",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 3,
+          "title": "Генерация SQL по естественному языку через LLM",
+          "slug": "3_generatsiya-sql-po-estestvennomu-yazyku",
+          "task": "Пользователь задаёт вопрос к аналитической БД обычным языком, LLM строит SQL, система проверяет запрос и возвращает результат.",
+          "tech": [
+            "Python",
+            "FastAPI",
+            "LLM",
+            "PostgreSQL/ClickHouse",
+            "Kafka",
+            "SQLGlot",
+            "Redis",
+            "Docker"
+          ],
+          "architecture": "NL→SQL service + SQL validation sandbox + query execution + result API",
+          "patterns": [
+            "Facade",
+            "Strategy",
+            "Adapter",
+            "Proxy",
+            "Chain of Responsibility"
+          ],
+          "path": "projects/Sivogrivov_Denis/3_generatsiya-sql-po-estestvennomu-yazyku",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Sivogrivov_Denis/3_generatsiya-sql-po-estestvennomu-yazyku",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 4,
+          "title": "Рекомендации музыки по истории прослушивания",
+          "slug": "4_rekomendatsii-muzyki-po-istorii",
+          "task": "Собирать события прослушивания и строить персональные рекомендации на основе похожих треков и поведения пользователей.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "Python ML",
+            "implicit/LightFM",
+            "PostgreSQL",
+            "Redis",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "Event stream → feature/embedding service → recommender → recommendation API",
+          "patterns": [
+            "Strategy",
+            "Observer",
+            "Repository",
+            "Factory",
+            "Producer–Consumer"
+          ],
+          "path": "projects/Sivogrivov_Denis/4_rekomendatsii-muzyki-po-istorii",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Sivogrivov_Denis/4_rekomendatsii-muzyki-po-istorii",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 5,
+          "title": "Обнаружение аномалий в IoT-сенсорах города",
+          "slug": "5_obnaruzhenie-anomaliy-v-iot-sensorakh",
+          "task": "Анализировать температуру, шум, качество воздуха и другие показатели, обнаруживая неисправные или аномальные датчики.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "scikit-learn",
+            "Isolation Forest",
+            "ClickHouse/TimescaleDB",
+            "Grafana",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "IoT event streaming + anomaly detection + time-series storage + alerting",
+          "patterns": [
+            "Observer",
+            "Strategy",
+            "Repository",
+            "Pipeline",
+            "Circuit Breaker"
+          ],
+          "path": "projects/Sivogrivov_Denis/5_obnaruzhenie-anomaliy-v-iot-sensorakh",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Sivogrivov_Denis/5_obnaruzhenie-anomaliy-v-iot-sensorakh",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        }
+      ]
+    },
+    {
+      "name": "Артём Царьков",
+      "slug": "Tsarkov_Artem",
+      "path": "projects/Tsarkov_Artem",
+      "done": 0,
+      "total": 5,
+      "projects": [
+        {
+          "n": 1,
+          "title": "Антифрод возвратов в e-commerce",
+          "slug": "1_antifrod-vozvratov-v-e-commerce",
+          "task": "Находить клиентов, которые систематически злоупотребляют возвратами, используя историю заказов, товаров и доставки.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "CatBoost",
+            "ClickHouse",
+            "PostgreSQL",
+            "Redis",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "Order event stream + customer features + scoring + investigation API",
+          "patterns": [
+            "Strategy",
+            "Chain of Responsibility",
+            "Repository",
+            "Observer",
+            "Adapter"
+          ],
+          "path": "projects/Tsarkov_Artem/1_antifrod-vozvratov-v-e-commerce",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Tsarkov_Artem/1_antifrod-vozvratov-v-e-commerce",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 2,
+          "title": "Сегментация спутниковых снимков",
+          "slug": "2_segmentatsiya-sputnikovykh-snimkov",
+          "task": "Разделять спутниковый снимок на лес, воду, здания, дороги и сельхозугодья для последующей геоаналитики.",
+          "tech": [
+            "Python",
+            "PyTorch",
+            "Rasterio",
+            "U-Net/SegFormer",
+            "MinIO",
+            "FastAPI",
+            "PostgreSQL/PostGIS",
+            "Docker"
+          ],
+          "architecture": "Raster ingestion → tiling → segmentation inference → geospatial storage → API",
+          "patterns": [
+            "Pipeline",
+            "Adapter",
+            "Strategy",
+            "Repository",
+            "Facade"
+          ],
+          "path": "projects/Tsarkov_Artem/2_segmentatsiya-sputnikovykh-snimkov",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Tsarkov_Artem/2_segmentatsiya-sputnikovykh-snimkov",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 3,
+          "title": "LLM-анализ резюме и вакансий",
+          "slug": "3_llm-analiz-rezyume-i-vakansiy",
+          "task": "Извлекать навыки из резюме и вакансий, сопоставлять их и объяснять, каких компетенций кандидату не хватает.",
+          "tech": [
+            "Python",
+            "FastAPI",
+            "LLM/Hugging Face",
+            "embeddings",
+            "pgvector",
+            "Kafka",
+            "PostgreSQL",
+            "Docker"
+          ],
+          "architecture": "Document ingestion + extraction + semantic matching + explanation service",
+          "patterns": [
+            "Facade",
+            "Strategy",
+            "Adapter",
+            "Repository",
+            "Pipeline"
+          ],
+          "path": "projects/Tsarkov_Artem/3_llm-analiz-rezyume-i-vakansiy",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Tsarkov_Artem/3_llm-analiz-rezyume-i-vakansiy",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 4,
+          "title": "Классификация обращений в службу поддержки",
+          "slug": "4_klassifikatsiya-obrashcheniy-v-sluzhbu",
+          "task": "Автоматически определять категорию обращения, приоритет и рекомендуемый маршрут тикета между командами.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "Hugging Face",
+            "FastAPI",
+            "PostgreSQL",
+            "Redis",
+            "Elasticsearch",
+            "Docker"
+          ],
+          "architecture": "Ticket event stream + NLP classifier + routing service + search/analytics",
+          "patterns": [
+            "Strategy",
+            "Chain of Responsibility",
+            "Observer",
+            "Repository",
+            "Command"
+          ],
+          "path": "projects/Tsarkov_Artem/4_klassifikatsiya-obrashcheniy-v-sluzhbu",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Tsarkov_Artem/4_klassifikatsiya-obrashcheniy-v-sluzhbu",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 5,
+          "title": "RL для игры с боевым дроном в 2D",
+          "slug": "5_rl-dlya-igry-s-boevym-dronom-v-2d",
+          "task": "Обучить агента двигаться к цели, избегать препятствий и выбирать момент атаки в симуляторе.",
+          "tech": [
+            "Python",
+            "Gymnasium",
+            "PyTorch",
+            "Stable-Baselines3",
+            "Pygame",
+            "Kafka",
+            "MLflow",
+            "Docker"
+          ],
+          "architecture": "Simulator + RL trainer + policy inference + telemetry/events",
+          "patterns": [
+            "State",
+            "Strategy",
+            "Command",
+            "Observer",
+            "Factory"
+          ],
+          "path": "projects/Tsarkov_Artem/5_rl-dlya-igry-s-boevym-dronom-v-2d",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Tsarkov_Artem/5_rl-dlya-igry-s-boevym-dronom-v-2d",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        }
+      ]
+    },
+    {
+      "name": "Денис Куравин",
+      "slug": "Kuravin_Denis",
+      "path": "projects/Kuravin_Denis",
+      "done": 0,
+      "total": 5,
+      "projects": [
+        {
+          "n": 1,
+          "title": "Антифрод рекламного трафика",
+          "slug": "1_antifrod-reklamnogo-trafika",
+          "task": "Обнаруживать ботов и накрутку кликов по рекламным объявлениям по IP, устройству, частоте и последовательности событий.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "XGBoost",
+            "Redis",
+            "ClickHouse",
+            "FastAPI",
+            "Grafana",
+            "Docker"
+          ],
+          "architecture": "Clickstream event processing + feature aggregation + fraud scoring + analytics",
+          "patterns": [
+            "Chain of Responsibility",
+            "Strategy",
+            "Repository",
+            "Observer",
+            "Circuit Breaker"
+          ],
+          "path": "projects/Kuravin_Denis/1_antifrod-reklamnogo-trafika",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Kuravin_Denis/1_antifrod-reklamnogo-trafika",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 2,
+          "title": "Детекция дефектов на фотографиях автомобилей",
+          "slug": "2_detektsiya-defektov-na-fotografiyakh",
+          "task": "Определять царапины, вмятины, разбитые фары и другие повреждения автомобиля по фотографиям.",
+          "tech": [
+            "Python",
+            "PyTorch",
+            "YOLO/Mask R-CNN",
+            "OpenCV",
+            "MinIO",
+            "FastAPI",
+            "PostgreSQL",
+            "Docker"
+          ],
+          "architecture": "Image upload → preprocessing → detection/segmentation → damage report API",
+          "patterns": [
+            "Pipeline",
+            "Strategy",
+            "Adapter",
+            "Factory",
+            "Repository"
+          ],
+          "path": "projects/Kuravin_Denis/2_detektsiya-defektov-na-fotografiyakh",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Kuravin_Denis/2_detektsiya-defektov-na-fotografiyakh",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 3,
+          "title": "RAG-поиск по книгам и учебным материалам",
+          "slug": "3_rag-poisk-po-knigam-i-uchebnym",
+          "task": "Индексировать большие коллекции книг и конспектов и отвечать на вопросы с поиском релевантных фрагментов.",
+          "tech": [
+            "Python",
+            "FastAPI",
+            "LLM",
+            "embeddings",
+            "Qdrant/pgvector",
+            "Kafka",
+            "MinIO",
+            "Docker"
+          ],
+          "architecture": "Ingestion → chunking → embeddings → vector search → RAG generation",
+          "patterns": [
+            "Pipeline",
+            "Facade",
+            "Adapter",
+            "Repository",
+            "Strategy"
+          ],
+          "path": "projects/Kuravin_Denis/3_rag-poisk-po-knigam-i-uchebnym",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Kuravin_Denis/3_rag-poisk-po-knigam-i-uchebnym",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 4,
+          "title": "Анализ тональности финансовых новостей",
+          "slug": "4_analiz-tonalnosti-finansovykh-novostey",
+          "task": "Собирать финансовые новости, определять позитивный/негативный/нейтральный тон и связывать публикации с компаниями.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "Hugging Face",
+            "spaCy",
+            "Elasticsearch",
+            "ClickHouse",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "News streaming → NER → sentiment → entity aggregation → analytics",
+          "patterns": [
+            "Pipeline",
+            "Strategy",
+            "Adapter",
+            "Observer",
+            "Repository"
+          ],
+          "path": "projects/Kuravin_Denis/4_analiz-tonalnosti-finansovykh-novostey",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Kuravin_Denis/4_analiz-tonalnosti-finansovykh-novostey",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        },
+        {
+          "n": 5,
+          "title": "Прогнозирование энергопотребления здания",
+          "slug": "5_prognozirovanie-energopotrebleniya",
+          "task": "Собирать показания счётчиков и датчиков, прогнозировать потребление на ближайшие часы и находить необычные пики.",
+          "tech": [
+            "Python",
+            "Kafka",
+            "XGBoost/LightGBM",
+            "Pandas",
+            "ClickHouse/TimescaleDB",
+            "Grafana",
+            "FastAPI",
+            "Docker"
+          ],
+          "architecture": "IoT/time-series streaming + forecasting service + anomaly detection + dashboard",
+          "patterns": [
+            "Observer",
+            "Strategy",
+            "Repository",
+            "Pipeline",
+            "Circuit Breaker"
+          ],
+          "path": "projects/Kuravin_Denis/5_prognozirovanie-energopotrebleniya",
+          "url": "https://github.com/godor1333/Software_architecture_2025_API/tree/main/projects/Kuravin_Denis/5_prognozirovanie-energopotrebleniya",
+          "done": false,
+          "files": 0,
+          "submitted_at": "",
+          "pr": null,
+          "pr_url": "",
+          "by": "",
+          "by_login": false
+        }
+      ]
+    }
+  ]
+}

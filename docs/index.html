@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Проекты студентов — Software Architecture 2025</title>
+<meta name="description" content="Прогресс загрузки студенческих проектов. Обновляется автоматически после принятия pull request.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f4ef; --surface:#ffffff; --surface-2:#efece5; --ink:#1b1d1c; --muted:#6b6f6a;
+  --line:#e2ded5; --accent:#1f8a5b; --accent-soft:#dcefe5; --pending:#c9c4b8; --warn:#b4641c;
+  --shadow:0 1px 2px rgba(20,20,20,.04),0 6px 24px rgba(20,20,20,.05);
+  --radius:16px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#121413; --surface:#1a1d1b; --surface-2:#222623; --ink:#ecebe6; --muted:#9a9e98;
+    --line:#2c302d; --accent:#3fbf86; --accent-soft:#1d3a2d; --pending:#3a3f3b; --warn:#e3995a;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 24px rgba(0,0,0,.25);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 Manrope,system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:40px 20px 80px}
+.mono{font-family:"JetBrains Mono",ui-monospace,Consolas,monospace}
+
+/* hero */
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:700}
+h1{font-size:clamp(28px,4.4vw,46px);line-height:1.08;margin:10px 0 6px;font-weight:800;letter-spacing:-.02em}
+.sub{color:var(--muted);margin:0 0 28px;max-width:640px}
+.hero{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end;margin-bottom:22px}
+.count{font-weight:800;font-size:clamp(46px,8vw,88px);line-height:.9;letter-spacing:-.04em}
+.count small{font-size:.38em;color:var(--muted);font-weight:600;letter-spacing:0}
+.count-label{color:var(--muted);font-weight:600;margin-top:6px;text-align:right}
+.cells{display:grid;grid-template-columns:repeat(40,1fr);gap:4px;margin:6px 0 10px}
+.cell{height:22px;border-radius:5px;background:var(--pending);transition:transform .15s}
+.cell.done{background:var(--accent)}
+.cell:hover{transform:scaleY(1.25)}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 18px;color:var(--muted);font-size:13px}
+.meta-row a{text-decoration:none;border-bottom:1px solid var(--line)}
+.meta-row a:hover{color:var(--ink)}
+
+/* toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:34px 0 18px;position:sticky;top:0;z-index:5;padding:10px 0;background:linear-gradient(var(--bg) 75%,transparent)}
+.search{flex:1 1 260px;display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:0 12px}
+.search input{flex:1;border:0;outline:0;background:transparent;color:var(--ink);font:inherit;padding:11px 0}
+.seg{display:inline-flex;background:var(--surface-2);border-radius:12px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--muted);font:inherit;font-weight:700;font-size:13px;padding:8px 14px;border-radius:9px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+
+/* layout */
+.layout{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.card-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 18px 12px}
+.card-head h2{font-size:17px;margin:0;font-weight:800;letter-spacing:-.01em}
+.card-head .score{font-weight:700;color:var(--muted);font-size:13px;white-space:nowrap}
+.card-head .score b{color:var(--ink)}
+.minibar{height:4px;background:var(--surface-2);margin:0 18px 6px;border-radius:4px;overflow:hidden}
+.minibar i{display:block;height:100%;background:var(--accent);border-radius:4px;transition:width .4s}
+.complete .card-head h2::after{content:" ✓";color:var(--accent)}
+
+.proj{border-top:1px solid var(--line)}
+.proj:first-of-type{border-top:0}
+.proj summary{list-style:none;display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:start;padding:11px 18px;cursor:pointer}
+.proj summary::-webkit-details-marker{display:none}
+.proj summary:hover{background:var(--surface-2)}
+.check{width:22px;height:22px;border-radius:7px;border:2px solid var(--pending);display:grid;place-items:center;margin-top:1px}
+.done .check{background:var(--accent);border-color:var(--accent)}
+.done .check svg{display:block}
+.check svg{display:none;width:13px;height:13px;stroke:#fff;stroke-width:3;fill:none}
+.ptitle{font-weight:600;line-height:1.35}
+.pmeta{font-size:12px;color:var(--muted);margin-top:2px}
+.num{color:var(--muted);font-size:12px;padding-top:3px}
+.pending-tag{font-size:11px;color:var(--muted);background:var(--surface-2);padding:2px 7px;border-radius:6px;white-space:nowrap}
+.body{padding:2px 18px 16px 54px;font-size:14px}
+.body h4{margin:12px 0 4px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.body p{margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-size:12px;background:var(--surface-2);border-radius:6px;padding:2px 8px}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.btn{font-size:13px;font-weight:700;text-decoration:none;border:1px solid var(--line);border-radius:9px;padding:6px 11px;background:var(--surface)}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* sidebar */
+aside{position:sticky;top:76px;display:flex;flex-direction:column;gap:16px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+.panel h3{margin:0 0 10px;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.feed{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.feed li{font-size:13px;line-height:1.35}
+.feed .who{font-weight:700}
+.feed .when{color:var(--muted);font-size:12px}
+.empty{color:var(--muted);font-size:13px}
+.rank{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.rank li{display:grid;grid-template-columns:1fr auto;gap:8px;font-size:13px}
+.rank .dots{display:flex;gap:3px;align-items:center}
+.rank .dots i{width:9px;height:9px;border-radius:3px;background:var(--pending)}
+.rank .dots i.on{background:var(--accent)}
+details.tmpl summary{cursor:pointer;font-weight:700}
+.tmpl table{width:100%;border-collapse:collapse;font-size:13px;margin-top:12px}
+.tmpl td{border-top:1px solid var(--line);padding:8px 6px;vertical-align:top}
+.tmpl td:first-child{font-weight:700;white-space:nowrap}
+footer{margin-top:40px;color:var(--muted);font-size:13px}
+.hidden{display:none!important}
+.err{background:var(--surface);border:1px dashed var(--warn);color:var(--warn);padding:16px;border-radius:12px}
+
+@media (max-width:960px){
+  .layout{grid-template-columns:1fr}
+  aside{position:static}
+}
+@media (max-width:640px){
+  .wrap{padding:28px 16px 60px}
+  .hero{grid-template-columns:1fr}
+  .count-label{text-align:left}
+  .cells{grid-template-columns:repeat(20,1fr)}
+  .grid{grid-template-columns:1fr}
+  .body{padding-left:18px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Software Architecture · 2025</div>
+  <div class="hero">
+    <div>
+      <h1 id="title">Проекты студентов</h1>
+      <p class="sub">Каждая клетка — один проект. Она становится зелёной автоматически, когда принят pull request с файлами в папку проекта.</p>
+    </div>
+    <div>
+      <div class="count mono" id="count">—<small> / —</small></div>
+      <div class="count-label">проектов загружено</div>
+    </div>
+  </div>
+  <div class="cells" id="cells" aria-label="Прогресс по всем проектам"></div>
+  <div class="meta-row">
+    <span id="updated">Загрузка…</span>
+    <a id="repoLink" href="#" target="_blank" rel="noopener">Репозиторий на GitHub →</a>
+  </div>
+
+  <div class="toolbar">
+    <label class="search">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--muted)"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Поиск: студент, проект, технология…" autocomplete="off">
+    </label>
+    <div class="seg" role="group" aria-label="Фильтр">
+      <button data-f="all" aria-pressed="true">Все</button>
+      <button data-f="done" aria-pressed="false">Сдано</button>
+      <button data-f="todo" aria-pressed="false">Ждём</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <main><div class="grid" id="grid"></div></main>
+    <aside>
+      <div class="panel"><h3>Последние сдачи</h3><ul class="feed" id="feed"></ul></div>
+      <div class="panel"><h3>По участникам</h3><ul class="rank" id="rank"></ul></div>
+      <div class="panel"><details class="tmpl"><summary>Что должно быть в отчёте</summary><table id="tmpl"></table></details></div>
+    </aside>
+  </div>
+
+  <footer>Страница собирается GitHub Actions из <span class="mono">docs/progress.json</span>. Данные обновляются после каждого принятого PR.</footer>
+</div>
+
+<script>
+const CHECK = '<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt = iso => { if(!iso) return ''; const d = new Date(iso); return isNaN(d) ? iso.slice(0,10) : d.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'}); };
+const fmtTime = iso => { const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleString('ru-RU',{day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'}); };
+let DATA = null, filter = 'all', query = '';
+const openSet = new Set();
+
+function projectHTML(s, p){
+  const key = s.slug + '/' + p.slug;
+  const meta = p.done
+    ? [p.pr ? `PR #${p.pr}` : '', p.by ? (p.by_login ? '@'+esc(p.by) : esc(p.by)) : '', p.submitted_at ? fmt(p.submitted_at) : ''].filter(Boolean).join(' · ')
+    : '';
+  return `<details class="proj ${p.done?'done':''}" data-key="${esc(key)}" ${openSet.has(key)?'open':''}>
+    <summary>
+      <span class="check">${CHECK}</span>
+      <span><div class="ptitle">${esc(p.title)}</div>${meta?`<div class="pmeta">${meta}</div>`:''}</span>
+      ${p.done ? `<span class="num mono">#${p.n}</span>` : `<span class="pending-tag">ждём</span>`}
+    </summary>
+    <div class="body">
+      <h4>Что нужно сделать</h4><p>${esc(p.task)}</p>
+      <h4>Архитектура</h4><p>${esc(p.architecture)}</p>
+      <h4>Технологии</h4><div class="chips">${p.tech.map(t=>`<span class="chip">${esc(t)}</span>`).join('')}</div>
+      <h4>Паттерны</h4><div class="chips">${p.patterns.map(t=>`<span class="chip">${esc(t)}</span>`).join('')}</div>
+      <div class="btns">
+        <a class="btn ${p.done?'primary':''}" href="${esc(p.url)}" target="_blank" rel="noopener">📁 Папка проекта</a>
+        ${p.pr_url ? `<a class="btn" href="${esc(p.pr_url)}" target="_blank" rel="noopener">Pull request #${p.pr}</a>` : ''}
+        ${p.done ? '' : `<span class="pmeta" style="align-self:center">Положите файлы в <span class="mono">${esc(p.path)}/</span></span>`}
+      </div>
+    </div>
+  </details>`;
+}
+
+function matches(s, p){
+  if (filter === 'done' && !p.done) return false;
+  if (filter === 'todo' && p.done) return false;
+  if (!query) return true;
+  const hay = [s.name, p.title, p.task, p.architecture, ...p.tech, ...p.patterns].join(' ').toLowerCase();
+  return query.split(/\s+/).every(w => hay.includes(w));
+}
+
+function render(){
+  const d = DATA;
+  document.getElementById('title').textContent = 'Проекты студентов';
+  document.getElementById('count').innerHTML = `${d.done}<small> / ${d.total}</small>`;
+  document.getElementById('updated').textContent = 'Обновлено ' + fmtTime(d.updated_at);
+  document.getElementById('repoLink').href = d.repo_url;
+
+  const all = d.students.flatMap(s => s.projects.map(p => ({s, p})));
+  const cells = document.getElementById('cells');
+  cells.style.gridTemplateColumns = window.innerWidth < 640 ? `repeat(${Math.ceil(all.length/2)},1fr)` : `repeat(${all.length},1fr)`;
+  cells.innerHTML = all.map(({s,p}) => `<div class="cell ${p.done?'done':''}" title="${esc(s.name)} — ${esc(p.title)}${p.done?' ✓':''}"></div>`).join('');
+
+  const grid = document.getElementById('grid');
+  grid.innerHTML = d.students.map(s => {
+    const items = s.projects.filter(p => matches(s, p));
+    if (!items.length) return '';
+    const pct = Math.round(100*s.done/s.total);
+    return `<section class="card ${s.done===s.total?'complete':''}">
+      <div class="card-head"><h2>${esc(s.name)}</h2><span class="score"><b>${s.done}</b> / ${s.total}</span></div>
+      <div class="minibar"><i style="width:${pct}%"></i></div>
+      ${items.map(p => projectHTML(s, p)).join('')}
+    </section>`;
+  }).join('') || '<p class="empty">Ничего не найдено.</p>';
+
+  const recent = all.filter(x => x.p.done && x.p.submitted_at).sort((a,b) => b.p.submitted_at.localeCompare(a.p.submitted_at)).slice(0, 8);
+  document.getElementById('feed').innerHTML = recent.length
+    ? recent.map(({s,p}) => `<li><div class="who">${esc(s.name)}</div><div>${esc(p.title)}</div><div class="when">${fmt(p.submitted_at)}${p.pr?` · <a href="${esc(p.pr_url)}" target="_blank" rel="noopener">PR #${p.pr}</a>`:''}</div></li>`).join('')
+    : '<li class="empty">Пока ни одного принятого проекта.</li>';
+
+  document.getElementById('rank').innerHTML = [...d.students].sort((a,b) => b.done - a.done || a.name.localeCompare(b.name,'ru'))
+    .map(s => `<li><span>${esc(s.name)}</span><span class="dots">${s.projects.map(p=>`<i class="${p.done?'on':''}"></i>`).join('')}</span></li>`).join('');
+
+  document.getElementById('tmpl').innerHTML = d.report_template.map(r => `<tr><td>${esc(r.section)}</td><td>${esc(r.required)}</td></tr>`).join('');
+}
+
+async function load(){
+  try{
+    const r = await fetch('progress.json?t=' + Date.now(), {cache:'no-store'});
+    if (!r.ok) throw new Error(r.status);
+    DATA = await r.json();
+    render();
+  }catch(e){
+    if (!DATA) document.getElementById('grid').innerHTML = `<div class="err">Не удалось загрузить progress.json (${esc(e.message)}).</div>`;
+  }
+}
+
+document.getElementById('grid').addEventListener('toggle', e => {
+  const k = e.target.dataset && e.target.dataset.key; if (!k) return;
+  e.target.open ? openSet.add(k) : openSet.delete(k);
+}, true);
+document.getElementById('q').addEventListener('input', e => { query = e.target.value.trim().toLowerCase(); DATA && render(); });
+document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+  filter = b.dataset.f;
+  document.querySelectorAll('.seg button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  DATA && render();
+}));
+window.addEventListener('resize', () => DATA && render());
+load();
+setInterval(load, 120000);
+</script>
+</body>
+</html>

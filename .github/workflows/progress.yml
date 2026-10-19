@@ -1,0 +1,62 @@
+name: Прогресс проектов
+
+# Срабатывает после каждого push в main — то есть и после принятого Pull Request.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:   # кнопка «Run workflow» для ручного запуска
+
+permissions:
+  contents: write       # чтобы закоммитить обновлённый README
+  pull-requests: read   # чтобы узнать номер PR и автора
+  pages: write          # публикация GitHub Pages
+  id-token: write
+
+concurrency:
+  group: progress
+  cancel-in-progress: false
+
+jobs:
+  update:
+    name: Обновить README и progress.json
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0   # нужна вся история, чтобы найти PR каждого проекта
+
+      - name: Пересчитать прогресс
+        run: python3 scripts/update_progress.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Закоммитить изменения
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A README.md docs/progress.json projects
+          if git diff --cached --quiet; then
+            echo "Изменений нет"
+          else
+            git commit -m "Автообновление прогресса проектов [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+
+  deploy:
+    name: Опубликовать сайт
+    needs: update
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main        # берём свежий main с уже обновлённым progress.json
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs
+      - id: deployment
+        uses: actions/deploy-pages@v4
